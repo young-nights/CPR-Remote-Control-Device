@@ -30,7 +30,9 @@
 #include "bsp_led.h"
 #include "bsp_hard.h"
 #include "st7789_spi.h"
-#include "st7789_drive.h"
+#include <st7789_driver.h>
+#include <lcd_driver.h>
+#include <ft6336u_iic.h>
 
 /* macSYS 头文件 */
 #include "bsp_typedef.h"

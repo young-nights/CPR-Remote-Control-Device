@@ -49,7 +49,6 @@ UART_HandleTypeDef huart1;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
-
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -233,14 +232,21 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, TOUCH_RST_Pin|LED_GREEN_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOC, LCD_DC_Pin|LCD_RST_Pin|Matrixkey_Column1_Pin|Matrixkey_Column2_Pin
                           |Matrixkey_Column3_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, LCD_CS_Pin|LCD_BLK_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, GPIO_PIN_RESET);
+  /*Configure GPIO pin : TOUCH_RST_Pin */
+  GPIO_InitStruct.Pin = TOUCH_RST_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  HAL_GPIO_Init(TOUCH_RST_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : LCD_DC_Pin LCD_RST_Pin */
   GPIO_InitStruct.Pin = LCD_DC_Pin|LCD_RST_Pin;
