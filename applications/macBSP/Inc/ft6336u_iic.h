@@ -19,7 +19,6 @@ typedef struct {
     uint8_t     i2c_addr;
     uint8_t     i2c_read_flag;
     uint8_t     i2c_write_flag;
-    rt_bool_t   initialized;
     struct rt_i2c_bus_device    *i2c_bus;
 }iicStructure_t;
 extern iicStructure_t ft6336u_iic;
@@ -36,8 +35,8 @@ extern iicStructure_t ft6336u_iic;
 
 
 //-----------函数声明------------------
-void ft6336u_device_init(iicStructure_t param);
-rt_err_t iic_ft6336u_write_reg(struct rt_i2c_bus_device *bus,rt_uint8_t i2c_reg);
+void ft6336u_device_init(void);
+rt_err_t iic_ft6336u_write_reg(struct rt_i2c_bus_device *bus,rt_uint8_t *i2c_reg);
 rt_err_t iic_ft6336u_write_reg_datas(struct rt_i2c_bus_device *bus,rt_uint8_t* data_buf);
 rt_err_t iic_ft6336u_read_reg(struct rt_i2c_bus_device *bus, rt_uint8_t len,rt_uint8_t* i2c_dat);
 

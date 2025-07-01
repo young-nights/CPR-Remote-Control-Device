@@ -12,25 +12,24 @@
 
 
 
-iicStructure_t ft6336u_iic;
+iicStructure_t ft6336u_iic = {
+        .i2c_name       = "i2c1",   /* 设备结点 */
+        .i2c_addr       = 0x70,     /* ft6336u的iic地址 */
+        .i2c_write_flag = 0xE0,     /* ft6336u的写标志   */
+        .i2c_read_flag  = 0xE1,     /* ft6336u的读标志   */
+};
+
 
 /**
  * @brief   ft6336u初始化IIC总线
  * @param   None
  * @return  None
  */
-void ft6336u_device_init(iicStructure_t param)
+void ft6336u_device_init(void)
 {
-    strcpy(param.i2c_name, "i2c1");
-    param.i2c_addr = 0x70;
-    param.i2c_read_flag = 0xE1;
-    param.i2c_write_flag = 0xE0;
-    param.initialized = RT_FALSE;
-
-    param.i2c_bus = (struct rt_i2c_bus_device *)(rt_device_find(param.i2c_name));
-    if(param.i2c_bus != RT_NULL){
+    ft6336u_iic.i2c_bus = (struct rt_i2c_bus_device *)(rt_device_find(ft6336u_iic.i2c_name));
+    if(ft6336u_iic.i2c_bus != RT_NULL){
         rt_kprintf("PRINTF:%d. ft6336u_iic bus is found!\r\n",Record.kprintf_cnt++);
-        param.initialized = RT_TRUE;
     }
     else {
         rt_kprintf("ft6336u_iic bus can't find!\r\n");
@@ -77,16 +76,16 @@ rt_err_t iic_ft6336u_write_reg_datas(struct rt_i2c_bus_device *bus,rt_uint8_t* d
  *         *i2c_reg : 寄存器地址(传入的是地址指针)
  * @return
  */
-rt_err_t iic_ft6336u_write_reg(struct rt_i2c_bus_device *bus,rt_uint8_t i2c_reg)
+rt_err_t iic_ft6336u_write_reg(struct rt_i2c_bus_device *bus,rt_uint8_t *i2c_reg)
 {
     /* 定义IIC消息结构体 */
     struct rt_i2c_msg   ft6336u_msg;
-    rt_uint8_t SendDat;
+    rt_uint8_t *SendDat;
     SendDat = i2c_reg;
 
     ft6336u_msg.addr  = ft6336u_iic.i2c_addr;
     ft6336u_msg.flags = RT_I2C_WR;
-    ft6336u_msg.buf   = &SendDat; /* 这里传递的是数据变量的地址 */
+    ft6336u_msg.buf   = SendDat; /* 这里传递的是数据变量的地址 */
     ft6336u_msg.len   = 1;
 
     if(rt_i2c_transfer(bus, &ft6336u_msg, 1) == 1){
@@ -110,6 +109,8 @@ rt_err_t iic_ft6336u_write_reg(struct rt_i2c_bus_device *bus,rt_uint8_t i2c_reg)
  */
 rt_err_t iic_ft6336u_read_reg(struct rt_i2c_bus_device *bus, rt_uint8_t len,rt_uint8_t* i2c_dat)
 {
+
+
     struct  rt_i2c_msg  ft6336u_msg;
 
     ft6336u_msg.addr  = ft6336u_iic.i2c_addr;

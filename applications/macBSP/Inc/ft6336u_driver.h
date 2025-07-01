@@ -26,17 +26,19 @@ extern FT6336U_IC_INFO ft6336u_info;
 
 
 //-----------寄存器定义------------------
-#define ID_G_CIPHER_HIGH      0xA3  //芯片代号高字节
-#define ID_G_CIPHER_MIDE      0x9F  //芯片代号中字节
-#define ID_G_CIPHER_LOW       0xA0  //芯片代号低字节
+typedef struct
+{
+    uint8_t  ID_G_CIPHER_HIGH;
+    uint8_t  ID_G_CIPHER_MIDE;
+    uint8_t  ID_G_CIPHER_LOW;
+    uint8_t  ID_G_LIB_VERSION_H;
+    uint8_t  ID_G_LIB_VERSION_L;
+    uint8_t  ID_G_FIRMID;
+    uint8_t  ID_G_FOCALTECH_ID;
+    uint8_t  ID_G_FACE_DEC_MODE;
+}FT6336U_IC_REG;
+extern FT6336U_IC_REG ft6336u_reg;
 
-#define ID_G_LIB_VERSION_H    0xA1  //APP库文件版本高字节
-#define ID_G_LIB_VERSION_L    0xA2  //APP库文件版本低字节
-
-#define ID_G_FIRMID           0xA6  //固件版本
-#define ID_G_FOCALTECH_ID     0xA8  //VENDOR ID
-
-#define ID_G_FACE_DEC_MODE    0xB0  //近距离感应使能
 
 
 
