@@ -26,13 +26,15 @@
 #include "rtt_system_work.h"
 
 /* macBSP 头文件 */
+#include "bsp_hard.h"
 #include "bsp_key.h"
 #include "bsp_led.h"
-#include "bsp_hard.h"
+#include "ft6336u_driver.h"
+#include "ft6336u_iic.h"
+#include "lcd_driver.h"
+#include "st7789_driver.h"
 #include "st7789_spi.h"
-#include <st7789_driver.h>
-#include <lcd_driver.h>
-#include <ft6336u_iic.h>
+
 
 /* macSYS 头文件 */
 #include "bsp_typedef.h"
@@ -47,6 +49,7 @@
 
 // 这个宏用于使能lv_printf.c文件中的lv_snprintf()函数
 #define USE_LV_SNPRINTF     0
+
 
 
 

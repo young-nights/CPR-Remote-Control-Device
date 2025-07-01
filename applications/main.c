@@ -19,7 +19,6 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -48,12 +47,12 @@ int main(void)
 
   //-------BSP板级硬件初始化----------
   LED_Init();
-
   //-------软件定时器初始化----------
   rt_kprintf("----------------------------------------\r\n");
   sysTimer_Init();
   ledTimer_Init();
   keyTimer_Init();
+
 
 
 

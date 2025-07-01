@@ -22,7 +22,7 @@ typedef struct
     uint8_t     FIRMWARE_VERSION;
     uint8_t     VENDOR_ID;
 }FT6336U_IC_INFO;
-
+extern FT6336U_IC_INFO ft6336u_info;
 
 
 //-----------寄存器定义------------------
@@ -43,7 +43,7 @@ typedef struct
 
 //-----------函数声明------------------
 void FT6336U_RESET(void);
-
+void FT6336U_READ_INFO(struct rt_i2c_bus_device *bus,FT6336U_IC_INFO *info);
 
 
 #endif /* APPLICATIONS_MACBSP_INC_FT6336U_DRIVER_H_ */

@@ -8,12 +8,21 @@
  * 2025-06-30     18452       the first version
  */
 #ifndef APPLICATIONS_MACBSP_INC_FT6336U_IIC_H_
-#define APPLICATIONS_MACBSP_INC_FT6336U_IIC_DRIVER_H_
+#define APPLICATIONS_MACBSP_INC_FT6336U_IIC_H_
 
 #include "bsp_sys.h"
 
 
-
+/* 软件iic配置参数结构体 */
+typedef struct {
+    char        i2c_name[16];
+    uint8_t     i2c_addr;
+    uint8_t     i2c_read_flag;
+    uint8_t     i2c_write_flag;
+    rt_bool_t   initialized;
+    struct rt_i2c_bus_device    *i2c_bus;
+}iicStructure_t;
+extern iicStructure_t ft6336u_iic;
 
 
 /* 复位引脚 -- RST */
@@ -27,7 +36,7 @@
 
 
 //-----------函数声明------------------
-void ft6336u_device_init(void);
+void ft6336u_device_init(iicStructure_t param);
 rt_err_t iic_ft6336u_write_reg(struct rt_i2c_bus_device *bus,rt_uint8_t i2c_reg);
 rt_err_t iic_ft6336u_write_reg_datas(struct rt_i2c_bus_device *bus,rt_uint8_t* data_buf);
 rt_err_t iic_ft6336u_read_reg(struct rt_i2c_bus_device *bus, rt_uint8_t len,rt_uint8_t* i2c_dat);
